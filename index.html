@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bootstrap demo</title>
+    <title>Auctus Dashboard</title>
     <style>
       .body {
         font-family: "Plus Jakarta Sans", sans-serif;
@@ -36,6 +36,12 @@
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
       rel="stylesheet"
     />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <nav class="navbar bg-body-tertiary shadow">
@@ -54,10 +60,69 @@
           />
           AUCTUS
         </a>
+        <!-- Button trigger modal -->
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          <i data-feather="settings"></i>
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Add Dashboard Livestream Link
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form
+                  id="yt-form"
+                  onsubmit="event.preventDefault(); changeLive()"
+                >
+                  <div class="mb-3">
+                    <label for="livestream-url" class="form-label"
+                      >Livestream Url</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="livestream-url"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                  <button
+                    data-bs-dismiss="modal"
+                    type="submit"
+                    class="btn btn-primary"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
     <main class="mx-5 my-4 d-flex flex-row gap-3">
-      <article class="d-flex flex-column gap-3" style="width: 20%">
+      <!-- <article class="d-flex flex-column gap-3" style="width: 20%">
         <section
           class="d-flex flex-column rounded-4 justify-content-center align-middle shadow-lg total-box-down"
         >
@@ -114,10 +179,21 @@
             <h1 class="text-white">1023</h1>
           </div>
         </section>
-      </article>
+      </article> -->
+
+      <iframe
+        width="400"
+        height="750"
+        src="https://lookerstudio.google.com/embed/reporting/67fdf617-9b3f-45b3-a33a-af84d5090177/page/CsWqD"
+        frameborder="0"
+        style="border: 0"
+        allowfullscreen
+        sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+      ></iframe>
 
       <article class="w-100">
         <iframe
+          id="yt-frame"
           class="w-100"
           height="650"
           src="https://www.youtube.com/embed/1dz-7Uy96K0?si=x9wfLRZHxJOwpSSJ&amp;controls=0"
@@ -134,5 +210,16 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <script>
+      feather.replace();
+    </script>
+    <script>
+      $(document).ready(function () {
+        $("#yt-form").submit(function () {
+          let yt_url = $("#livestream-url").val() + "?controls=0";
+          $("#yt-frame").attr("src", yt_url);
+        });
+      });
+    </script>
   </body>
 </html>
